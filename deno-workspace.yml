@@ -1,0 +1,8 @@
+scripts:
+  nessie:
+    file: https://deno.land/x/nessie/cli.ts
+    deno_options:
+      allow-env: true
+      allow-read: ./
+      allow-write: ./db
+      allow-net: true # since we don't know where the server may be

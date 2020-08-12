@@ -35,9 +35,10 @@ some time apart and still acceptable representation in the database).
 
 ## Components
 
-- Deno
-- Nessie
-- PostgreSQL 12
+- [Deno](https://deno.land/)
+- [Nessie CLI](https://github.com/halvardssm/deno-nessie)
+- [DenoX](https://github.com/BentoumiTech/denox) (optional)
+- [PostgreSQL 12](https://www.postgresql.org/)
   - pgcrypto (for UUID support)
 
 
@@ -59,10 +60,24 @@ database user (typically `$(whoami)`).
 Set your database credentials in `.env`. See `.env.example` and specify 
 anything that doesn't match `.env.defaults`, typically the user and password.
 
+### For convenience
+
+You can use DenoX to simplify executing commands with permissions:
+
+```bash
+deno install -Af -n denox https://denopkg.com/BentoumiTech/denox/denox.ts
+```
+
+and ensure `~/.deno/bin` is in your `PATH`.
+
 ### Generate a migration
 
 ```bash
 deno run --allow-env --allow-net --allow-read --allow-write https://deno.land/x/nessie/cli.ts make name-of-migration
+```
+or
+```bash
+denox run nessie make name-of-migration
 ```
 
 ### Generate a seed file
@@ -70,11 +85,19 @@ deno run --allow-env --allow-net --allow-read --allow-write https://deno.land/x/
 ```bash
 deno run --allow-env --allow-net --allow-read --allow-write https://deno.land/x/nessie/cli.ts make:seed name-of-seed
 ```
+or
+```bash
+denox run nessie make:seed name-of-seed
+```
 
 ### Run migrations
 
 ```bash
 deno run --allow-env --allow-net --allow-read --allow-write https://deno.land/x/nessie/cli.ts migrate
+```
+or
+```bash
+denox run nessie migrate
 ```
 
 ### Rollback migrations
@@ -82,11 +105,19 @@ deno run --allow-env --allow-net --allow-read --allow-write https://deno.land/x/
 ```bash
 deno run --allow-env --allow-net --allow-read --allow-write https://deno.land/x/nessie/cli.ts rollback
 ```
+or
+```bash
+denox run nessie rollback
+```
 
 ### Seed the database
 
 ```bash
 deno run --allow-env --allow-net --allow-read --allow-write https://deno.land/x/nessie/cli.ts seed
+```
+or
+```bash
+denox run nessie seed
 ```
 
 ## Maintainer
